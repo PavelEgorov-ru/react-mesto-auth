@@ -1,0 +1,23 @@
+.profile__button {
+  padding: 14px 64px;
+  border: 1px solid white;
+}
+
+@media screen and (max-width: 880px) {
+  .profile__button {
+    padding: 14px 44px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profile__button {
+    padding: 10px 34px;
+  }
+}
+
+@media screen and (max-width: 668px) {
+  .profile__button {
+    padding: 17px calc((100% - 16px)/2);
+    max-height: 16px;
+  }
+}

@@ -1,0 +1,13 @@
+.profile__texts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+
+}
+
+@media screen and (max-width: 568px) {
+  .profile__texts {
+    gap: 14px;
+  }
+}

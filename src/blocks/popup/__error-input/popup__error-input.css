@@ -1,0 +1,7 @@
+.popup__error-input {
+  margin-top: 5px;
+  color: red;
+  font-size: 12px;
+  font-weight: 400;
+  visibility: hidden;
+}

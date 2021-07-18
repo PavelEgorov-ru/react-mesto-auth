@@ -1,0 +1,9 @@
+.popup__button_margin-normal {
+  margin-top: 48px;
+}
+
+@media screen and (max-width: 568px) {
+  .popup__button_margin-normal {
+    margin-top: 45px;
+  }
+}

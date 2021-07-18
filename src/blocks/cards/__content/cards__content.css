@@ -1,0 +1,10 @@
+.cards__content {
+ margin: 0 auto;
+ margin-top: 20px;
+ margin-bottom: 20px;
+ max-width: calc(100% - 40px);
+ display: flex;
+ justify-content: space-between;
+ box-sizing: border-box;
+ align-items: center;
+}

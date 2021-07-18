@@ -1,0 +1,14 @@
+.popup {
+  font-family: 'Inter', 'Arial', 'sans-serif';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility .2s, opacity .2s linear;
+ 
+}
+

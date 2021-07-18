@@ -1,0 +1,8 @@
+.cards__button-like {
+  width: 25px;
+  height: 22px;
+  background-image: url(./../../../images/like.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+

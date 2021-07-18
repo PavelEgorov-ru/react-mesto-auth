@@ -1,0 +1,12 @@
+.profile__rows {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 18px;
+}
+
+@media screen and (max-width: 568px) {
+  .profile__rows {
+    gap: 10px;
+  }
+}

@@ -1,0 +1,9 @@
+.sing__item-container {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  max-width: 358px;
+}
+/* .sing__item-container:nth-child(2n) {
+  margin: 0;
+} */

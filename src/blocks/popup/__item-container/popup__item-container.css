@@ -1,0 +1,10 @@
+.popup__item-container {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  max-width: 358px;
+}
+
+.popup__item-container:nth-child(2n) {
+  margin: 0;
+}

@@ -1,0 +1,40 @@
+.section_size_wide {
+
+  margin-left: calc((100% - 880px)/2);
+  margin-right: calc((100% - 880px)/2);
+}
+
+@media screen and (max-width: 980px) {
+  .section_size_wide {
+    margin-left: calc((100% - 768px)/2);
+    margin-right: calc((100% - 768px)/2);
+  }
+}  
+
+@media screen and (max-width: 880px) {
+  .section_size_wide {
+    margin-left: calc((100% - 668px)/2);
+    margin-right: calc((100% - 668px)/2);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .section_size_wide {
+    margin-left: calc((100% - 568px)/2);
+    margin-right: calc((100% - 568px)/2);
+  }
+}
+
+@media screen and (max-width: 668px) {
+  .section_size_wide {
+    margin-left: calc((100% - 468px)/2);
+    margin-right: calc((100% - 468px)/2);
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .section_size_wide {
+    margin-left: calc((100% - 282px)/2);
+    margin-right: calc((100% - 282px)/2);
+  }
+}
