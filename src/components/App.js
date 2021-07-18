@@ -162,19 +162,9 @@ function App() {
     <CurrentUserContext.Provider value = {currentUser}>
       <Header/>
         <Switch>
-          <ProtectedRoute path="/main" loggedIn = {loggedIn} component = {Main}>
-            <Main onEditProfile = {handleEditProfileClick} 
-                    onAddPlace = {handleAddPlaceClick} 
-                    onEditAvatar = {handleEditAvatarClick}
-                    onCardClick = {handleCardClick}
-                    cards = {cards}
-                    onCardLike = {handleCardLike}
-                    onCardDelete = {handleCardDelete}/>
-            <EditProfilePopup isOpen = {isEditProfilePopupOpen} onClose = {closeAllPopups} onUpdateUser = {handleUpdateUser}/>
-            <EditAvatarPopup isOpen = {isEditAvatarPopupOpen} onClose = {closeAllPopups} onUpdateAvatar = {handleUpdateAvatar} />
-            <AddPlacePopup isOpen = {isAddPlacePopupOpen} onClose = {closeAllPopups} onAddPlace = {handleAddPlaceSubmit} />
-            <ImagePopup card = {selectCard} onClose = {closeAllPopups} /> 
-          </ProtectedRoute>
+          <ProtectedRoute path="/main" loggedIn = {loggedIn} component = {Main} onEditProfile = {handleEditProfileClick}
+           onEditProfile = {handleEditProfileClick} onEditAvatar = {handleEditAvatarClick} onCardClick = {handleCardClick} 
+           cards = {cards} onCardLike = {handleCardLike} onCardDelete = {handleCardDelete}/>            
           <Route path = "/sing-up">               
             <Register onRegister={handleRegisterSubmit}/>                
           </Route>
@@ -186,7 +176,10 @@ function App() {
           </Route>
         </Switch>
       <Footer/>
-           
+      <EditProfilePopup isOpen = {isEditProfilePopupOpen} onClose = {closeAllPopups} onUpdateUser = {handleUpdateUser}/>
+      <EditAvatarPopup isOpen = {isEditAvatarPopupOpen} onClose = {closeAllPopups} onUpdateAvatar = {handleUpdateAvatar} />
+      <AddPlacePopup isOpen = {isAddPlacePopupOpen} onClose = {closeAllPopups} onAddPlace = {handleAddPlaceSubmit} />
+      <ImagePopup card = {selectCard} onClose = {closeAllPopups} /> 
     </CurrentUserContext.Provider>
     </div>
   );
