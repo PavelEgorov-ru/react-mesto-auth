@@ -83,13 +83,16 @@ function App() {
 
   function handleRegisterSubmit (email, password) {
     auth.register(email, password)
-    .then((data) => {
+    .then(() => {
         setFlag(true)
         setIsInfoOpen(true)
         history.push('/sing-in')
-      }
+        console.log ('111')    
+    }
     )
     .catch((error) => {
+      setFlag(false)
+      setIsInfoOpen(true)
       console.log(error)
     })
   }
@@ -97,15 +100,14 @@ function App() {
   function handleLoginSubmit (email, password) {
     auth.authorization(email, password)
     .then((data) => {
-      if(data) {
-        setLoggedIn(true)
-        history.push('/')
-        setUserEmail(email)
-      } else {
+      localStorage.setItem('jwt', data.token)
+      setLoggedIn(true)
+      history.push('/')
+      setUserEmail(email)
+    })
+    .catch((error) => {
       setFlag(false)
       setIsInfoOpen(true)
-      }})
-    .catch((error) => {
       console.log(error)
     })
   }
@@ -117,13 +119,9 @@ function App() {
       const jwt = localStorage.getItem('jwt');
       auth.getContent(jwt)
       .then((data) => {
-        if(data) {
           setLoggedIn(true)
           setUserEmail(data.data.email)
           history.push('/')
-        } else {
-          return
-        }
       })
       .catch((error) => console.log(error))
     }
