@@ -5,7 +5,8 @@ import Header from './Header.js';
 import Main from './Main.js';
 import AddPlacePopup from './AddPlacePopup.js'
 import EditProfilePopup from './EditProfilePopup.js';
-import EditAvatarPopup from './EditAvatarPopup.js'
+import EditAvatarPopup from './EditAvatarPopup.js';
+import InfoTooltip from './InfoTooltip.js'
 import ImagePopup from './ImagePopup.js';
 import Footer from './Footer.js';
 import {CurrentUserContext} from './../contexts/CurrentUserContext.js'
@@ -19,12 +20,16 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false)
+  const [isInfoOpen, setIsInfoOpen] = React.useState(false)
 
   const [selectCard, setSelectCard] = React.useState({})
   const [currentUser, setCurrentUser] = React.useState({})
   const [cards, setCards] = React.useState([])
+  const [userEmail, setUserEmail] = React.useState('')
+  const [flag, setFlag] = React.useState(false)
 
   const [loggedIn, setLoggedIn] = React.useState(false)
+  const [isLoading, setIsLoading] = React.useState(true)
 
   const history = useHistory()
   
@@ -34,10 +39,15 @@ function App() {
     .then((cardData) => {
       setCards(cardData)
     })
+    .then(() => setIsLoading(false))
     .catch((error) => {
       console.log(error)
     })
   }, []);
+
+  React.useEffect(() => {
+    componentDidMount()
+  }, [])
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
@@ -74,11 +84,11 @@ function App() {
   function handleRegisterSubmit (email, password) {
     auth.register(email, password)
     .then((data) => {
-      if(data) {
+        setFlag(true)
+        setIsInfoOpen(true)
         history.push('/sing-in')
-    } else {
-      console.log('получилась фигня')}
-    })
+      }
+    )
     .catch((error) => {
       console.log(error)
     })
@@ -90,15 +100,39 @@ function App() {
       if(data) {
         setLoggedIn(true)
         history.push('/')
-    } else {
-      console.log('получилась фигня')}
-    })
+        setUserEmail(email)
+      } else {
+      setFlag(false)
+      setIsInfoOpen(true)
+      }})
     .catch((error) => {
       console.log(error)
     })
   }
 
+  
 
+  function  componentDidMount () {
+    if (localStorage.getItem('jwt')){
+      const jwt = localStorage.getItem('jwt');
+      auth.getContent(jwt)
+      .then((data) => {
+        if(data) {
+          setLoggedIn(true)
+          setUserEmail(data.data.email)
+          history.push('/')
+        } else {
+          return
+        }
+      })
+      .catch((error) => console.log(error))
+    }
+  }
+
+  function handleSignOut (e) {    
+    localStorage.removeItem('jwt')
+    setUserEmail('')
+  }
 
   function handleUpdateUser (user) {
     newApi.editUserInfo(user)
@@ -152,24 +186,26 @@ function App() {
     setIsEditAvatarPopupOpen(false)
     setIsEditProfilePopupOpen(false)
     setIsAddPlacePopupOpen(false)
+    setIsInfoOpen(false)
     setSelectCard({})
   }
 
 
 
-  return (
-    < div className="page__container">
+  return (isLoading
+    ? < div className="page__container"/>
+    : < div className="page__container">
     <CurrentUserContext.Provider value = {currentUser}>
-      <Header/>
+      <Header email = {userEmail} onSignOut = {handleSignOut} />
         <Switch>
           <ProtectedRoute path="/main" loggedIn = {loggedIn} component = {Main} onEditProfile = {handleEditProfileClick}
            onEditProfile = {handleEditProfileClick} onEditAvatar = {handleEditAvatarClick} onCardClick = {handleCardClick} 
-           cards = {cards} onCardLike = {handleCardLike} onCardDelete = {handleCardDelete}/>            
+           cards = {cards} onCardLike = {handleCardLike} onCardDelete = {handleCardDelete} onAddPlace = {handleAddPlaceClick}/>            
           <Route path = "/sing-up">               
             <Register onRegister={handleRegisterSubmit}/>                
           </Route>
           <Route path = "/sing-in">                
-            <Login onLogin={handleLoginSubmit}/>
+            {!isLoading && <Login onLogin={handleLoginSubmit}/>}
           </Route>
           <Route path = "/">
             {loggedIn ? <Redirect to="/main" /> : <Redirect to="/sing-in" />}
@@ -179,7 +215,8 @@ function App() {
       <EditProfilePopup isOpen = {isEditProfilePopupOpen} onClose = {closeAllPopups} onUpdateUser = {handleUpdateUser}/>
       <EditAvatarPopup isOpen = {isEditAvatarPopupOpen} onClose = {closeAllPopups} onUpdateAvatar = {handleUpdateAvatar} />
       <AddPlacePopup isOpen = {isAddPlacePopupOpen} onClose = {closeAllPopups} onAddPlace = {handleAddPlaceSubmit} />
-      <ImagePopup card = {selectCard} onClose = {closeAllPopups} /> 
+      <ImagePopup card = {selectCard} onClose = {closeAllPopups} />
+      <InfoTooltip isOpen = {isInfoOpen} onClose = {closeAllPopups} flag = {flag}/>
     </CurrentUserContext.Provider>
     </div>
   );
