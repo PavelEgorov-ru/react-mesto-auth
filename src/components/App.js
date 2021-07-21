@@ -1,6 +1,6 @@
 // корневой компонент
 import React from 'react';
-import * as auth from './../auth.js'
+import * as auth from '../utils/auth.js'
 import Header from './Header.js';
 import Main from './Main.js';
 import AddPlacePopup from './AddPlacePopup.js'
@@ -29,7 +29,7 @@ function App() {
   const [flag, setFlag] = React.useState(false)
 
   const [loggedIn, setLoggedIn] = React.useState(false)
-  const [isLoading, setIsLoading] = React.useState(true)
+  const [isLoading, setIsLoading] = React.useState(false)
 
   const history = useHistory()
   
@@ -46,7 +46,7 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    componentDidMount()
+    checkToken()
   }, [])
 
   function handleCardLike(card) {
@@ -86,8 +86,7 @@ function App() {
     .then(() => {
         setFlag(true)
         setIsInfoOpen(true)
-        history.push('/sing-in')
-        console.log ('111')    
+        history.push('/sing-in')  
     }
     )
     .catch((error) => {
@@ -114,7 +113,8 @@ function App() {
 
   
 
-  function  componentDidMount () {
+  function checkToken () {
+    setIsLoading(true)
     if (localStorage.getItem('jwt')){
       const jwt = localStorage.getItem('jwt');
       auth.getContent(jwt)

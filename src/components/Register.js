@@ -1,19 +1,15 @@
 import React from 'react';
-import {withRouter} from 'react-router-dom'
+import {withRouter, Link} from 'react-router-dom'
 
 function Register (props) {
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
 
   function handleChangeEmail(e) {
-    // const {name, value} = e.target
-    // setEmail({[name]: value})
     setEmail(e.target.value)
   }
 
   function handleChangePassword(e) {
-    // const {name, value} = e.target
-    // setPassword({[name] : value})
     setPassword(e.target.value)
   }
 
@@ -35,7 +31,7 @@ function Register (props) {
           <span className = "sing__error-input"></span>
         </div>
         <button type = "submit" className ="sing__button opacity">Зарегистрироваться</button>
-        <div className = "sing__text">Уже зарегестрированы? <a className ="sing__text-link opacity" href = "#">Войти</a></div>
+        <div className = "sing__text">Уже зарегестрированы? <Link className ="sing__text-link opacity" to = "/sing-in">Войти</Link></div>
       </form>
     </div>
   )

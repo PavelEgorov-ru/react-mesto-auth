@@ -9,13 +9,11 @@ function Header (props) {
       <Switch>
         <Route path="/sing-up">
           <div className="header__container">
-            <div>{props.email}</div>
             <Link to="sing-in" className="header__link opacity"> Войти </Link>
           </div>
         </Route>
         <Route path="/sing-in">
           <div className="header__container">
-            <div>{props.email}</div>
             <Link to="sing-up" className="header__link opacity"> Зарегистрироваться </Link>
           </div>
         </Route>
