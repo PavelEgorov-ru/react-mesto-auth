@@ -28,7 +28,7 @@ class Api {
 
   }
 
-  newUserInfo() {
+  getUserInfo() {
     return this._request('users/me', 'GET')
   }
 

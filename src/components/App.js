@@ -28,22 +28,49 @@ function App() {
   const [userEmail, setUserEmail] = React.useState('')
   const [flag, setFlag] = React.useState(false)
 
-  const [loggedIn, setLoggedIn] = React.useState(false)
+  const [loggedIn, setLoggedIn] = React.useState(true)
   const [isLoading, setIsLoading] = React.useState(false)
 
   const history = useHistory()
   
 
-  React.useEffect(() => {
-    newApi.getCards()
-    .then((cardData) => {
+  // React.useEffect(() => {
+  //   setIsLoading(true)
+  //   newApi.getCards()
+  //   .then((cardData) => {
+  //     setCards(cardData)
+  //   })
+  //   .catch((error) => {
+  //     console.log(error)
+  //   })
+  //   .finally(() => setIsLoading(false))
+  // }, []);
+
+  // React.useEffect(() => {
+  //   newApi.newUserInfo()
+  //   .then((userData) => {
+  //     setCurrentUser(userData)
+  //   })
+  //   .catch((error) => {
+  //      console.log(error)
+  //   })
+  // }, [])
+
+
+
+  
+
+  React.useEffect(()=> {
+    Promise.all([newApi.getCards(), newApi.getUserInfo()])
+    .then(([cardData, userData]) => {
       setCards(cardData)
+      setCurrentUser(userData)
     })
-    .then(() => setIsLoading(false))
     .catch((error) => {
       console.log(error)
     })
-  }, []);
+    .finally(() => setIsLoading(false))
+  }, [])
 
   React.useEffect(() => {
     checkToken()
@@ -114,8 +141,8 @@ function App() {
   
 
   function checkToken () {
-    setIsLoading(true)
     if (localStorage.getItem('jwt')){
+      setIsLoading(true)
       const jwt = localStorage.getItem('jwt');
       auth.getContent(jwt)
       .then((data) => {
@@ -124,6 +151,7 @@ function App() {
           history.push('/')
       })
       .catch((error) => console.log(error))
+      .finally(() => setIsLoading(false))
     }
   }
 
@@ -154,15 +182,7 @@ function App() {
     })
   }
 
-  React.useEffect(() => {
-    newApi.newUserInfo()
-    .then((userData) => {
-      setCurrentUser(userData)
-    })
-    .catch((error) => {
-       console.log(error)
-    })
-  }, [])
+  
 
   const handleCardClick = (card) => {
     setSelectCard(card)
