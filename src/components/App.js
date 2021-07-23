@@ -29,11 +29,12 @@ function App() {
   const [flag, setFlag] = React.useState(false)
 
   const [loggedIn, setLoggedIn] = React.useState(false)
-  const [isLoading, setIsLoading] = React.useState(true)
+  const [isLoading, setIsLoading] = React.useState(false)
 
   const history = useHistory()  
 
   React.useEffect(()=> {
+    setIsLoading(true)
     if (loggedIn) {
     Promise.all([newApi.getCards(), newApi.getUserInfo()])
     .then(([cardData, userData]) => {
@@ -44,7 +45,9 @@ function App() {
       console.log(error)
     })
     .finally(() => setIsLoading(false))
-    }    
+    } else {
+      setIsLoading(false)
+    }  
   }, [loggedIn])
 
   React.useEffect(() => {
@@ -116,6 +119,7 @@ function App() {
   
 
   function checkToken () {
+    setIsLoading(true)
     if (localStorage.getItem('jwt')){
       setIsLoading(true)
       const jwt = localStorage.getItem('jwt');
@@ -127,6 +131,8 @@ function App() {
       })
       .catch((error) => console.log(error))
       .finally(() => setIsLoading(false))
+    } else {
+      setIsLoading(false)
     }
   }
 
