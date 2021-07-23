@@ -28,39 +28,13 @@ function App() {
   const [userEmail, setUserEmail] = React.useState('')
   const [flag, setFlag] = React.useState(false)
 
-  const [loggedIn, setLoggedIn] = React.useState(true)
-  const [isLoading, setIsLoading] = React.useState(false)
+  const [loggedIn, setLoggedIn] = React.useState(false)
+  const [isLoading, setIsLoading] = React.useState(true)
 
-  const history = useHistory()
-  
-
-  // React.useEffect(() => {
-  //   setIsLoading(true)
-  //   newApi.getCards()
-  //   .then((cardData) => {
-  //     setCards(cardData)
-  //   })
-  //   .catch((error) => {
-  //     console.log(error)
-  //   })
-  //   .finally(() => setIsLoading(false))
-  // }, []);
-
-  // React.useEffect(() => {
-  //   newApi.newUserInfo()
-  //   .then((userData) => {
-  //     setCurrentUser(userData)
-  //   })
-  //   .catch((error) => {
-  //      console.log(error)
-  //   })
-  // }, [])
-
-
-
-  
+  const history = useHistory()  
 
   React.useEffect(()=> {
+    if (loggedIn) {
     Promise.all([newApi.getCards(), newApi.getUserInfo()])
     .then(([cardData, userData]) => {
       setCards(cardData)
@@ -70,7 +44,8 @@ function App() {
       console.log(error)
     })
     .finally(() => setIsLoading(false))
-  }, [])
+    }    
+  }, [loggedIn])
 
   React.useEffect(() => {
     checkToken()
@@ -111,9 +86,9 @@ function App() {
   function handleRegisterSubmit (email, password) {
     auth.register(email, password)
     .then(() => {
-        setFlag(true)
-        setIsInfoOpen(true)
-        history.push('/sing-in')  
+      setFlag(true)
+      setIsInfoOpen(true)
+      history.push('/sing-in')  
     }
     )
     .catch((error) => {
@@ -180,9 +155,7 @@ function App() {
     .catch((error) => {
       console.log(error)
     })
-  }
-
-  
+  }  
 
   const handleCardClick = (card) => {
     setSelectCard(card)
@@ -207,8 +180,6 @@ function App() {
     setIsInfoOpen(false)
     setSelectCard({})
   }
-
-
 
   return (isLoading
     ? < div className="page__container"/>
