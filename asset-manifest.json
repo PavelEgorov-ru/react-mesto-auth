@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.94cfcb74.chunk.css",
+    "main.js": "/static/js/main.7d1a6f8b.chunk.js",
+    "main.js.map": "/static/js/main.7d1a6f8b.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.b9d8ad9d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.b9d8ad9d.js.map",
+    "static/js/2.eb653ef7.chunk.js": "/static/js/2.eb653ef7.chunk.js",
+    "static/js/2.eb653ef7.chunk.js.map": "/static/js/2.eb653ef7.chunk.js.map",
+    "static/js/3.cbf59eee.chunk.js": "/static/js/3.cbf59eee.chunk.js",
+    "static/js/3.cbf59eee.chunk.js.map": "/static/js/3.cbf59eee.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.94cfcb74.chunk.css.map": "/static/css/main.94cfcb74.chunk.css.map",
+    "static/js/2.eb653ef7.chunk.js.LICENSE.txt": "/static/js/2.eb653ef7.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/static/media/Vector_pen.8667ac4a.svg",
+    "static/media/Vector.03b78ada.svg": "/static/media/Vector.03b78ada.svg",
+    "static/media/Vector_plus.d86bb2ed.svg": "/static/media/Vector_plus.d86bb2ed.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b9d8ad9d.js",
+    "static/js/2.eb653ef7.chunk.js",
+    "static/css/main.94cfcb74.chunk.css",
+    "static/js/main.7d1a6f8b.chunk.js"
+  ]
+}
